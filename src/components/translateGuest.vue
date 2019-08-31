@@ -2,7 +2,7 @@
     <div id="translateGuest">
         <form  v-on:submit="formSubmit">
             <input id="adivinar" type="text" v-model="textToTranslate" placeholder="Adivine el numero...">
-            <input type="submit" value="Break">
+            <input type="submit" value="Romper">
         </form>
     </div>
 </template>

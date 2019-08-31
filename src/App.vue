@@ -34,14 +34,14 @@ export default {
     translateText:function(text) {
       this.$http.get('http://localhost:3000/setsecret/'+text)
       .then((response) => {
-        console.log(this.text);
+        //console.log(this.text);
         this.text = response.body.message
       });
     },
     translateGuest:function(text2) {
       this.$http.get('http://localhost:3000/guess/'+text2)
       .then((response2) => {
-        console.log(this.text2);
+        //console.log(this.text2);
         this.text2 = response2.body.result
       });
     },
