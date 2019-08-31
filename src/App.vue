@@ -1,17 +1,52 @@
+  
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>CodeBreaker</h1>
+    <translateIn v-on:formSubmit="translateText" />
+    <translateOut v-text="this.text"/>
+    <translateGuest v-on:formSubmit="translateGuest" />
+    <translateGuestOut v-text="this.text2"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import translateIn from './components/translateIn.vue'
+import translateOut from './components/translateOut.vue'
+import translateGuest from './components/translateGuest.vue'
+import translateGuestOut from './components/translateGuestOut.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  components: { 
+    translateIn,
+    translateOut,
+    translateGuest,
+    translateGuestOut,
+
+  },
+  data: function () {
+    return {
+      text:'',
+      text2:''
+    }
+  }
+  , methods: {
+    translateText:function(text) {
+      this.$http.get('http://localhost:3000/setsecret/'+text)
+      .then((response) => {
+        console.log(this.text);
+        this.text = response.body.message
+      });
+    },
+    translateGuest:function(text2) {
+      this.$http.get('http://localhost:3000/guess/'+text2)
+      .then((response2) => {
+        console.log(this.text2);
+        this.text2 = response2.body.result
+      });
+    },
+  }, 
+  printText(){
   }
 }
 </script>
